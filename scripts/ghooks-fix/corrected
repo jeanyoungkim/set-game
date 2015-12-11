@@ -1,0 +1,30 @@
+#!/usr/bin/env sh
+
+# This is a corrected version of ghooks auto-generated hook scripts
+# See ghooks issue for more information:
+# https://github.com/gtramontina/ghooks/issues/18
+
+source ~/.bashrc
+source ~/.bash_profile
+
+PATH="$PATH:/usr/local/bin"
+__dirname=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+__filename="${0##*/}"
+
+ghooks_runner="
+var path = require('path');
+var dirname = '$__dirname';
+var filename = path.resolve(dirname, '$__filename');
+
+try {
+    require('ghooks')(dirname, filename);
+} catch (e) {
+    console.warn([
+        'ghooks not found!',
+        'Make sure you have it installed in node_modules.',
+        'Skipping git hooks.'
+    ].join('\n'));
+}
+"
+
+node -e "$ghooks_runner"

@@ -1,0 +1,110 @@
+{
+  "name": "seg-fe",
+  "version": "0.0.2",
+  "main": "src/server.js",
+  "description": "Replatform of SEG's Front-End, using a modern JS stack.",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nytm/seg-fe.git"
+  },
+  "engines": {
+    "node": "^4.2.0"
+  },
+  "scripts": {
+    "babel-build": "rm -rf build && babel --out-dir build src",
+    "babel-watch": "rm -rf build && (babel --watch --out-dir build src &) && sleep 2",
+    "lint-css": "sass-lint --verbose",
+    "lint-js": "eslint . --ext .js,.jsx",
+    "lint": "npm run lint-js && npm run lint-css",
+    "watch-lint": "nodemon --watch src -e .jsx -x 'npm run lint; exit 0'",
+    "test": "find ./src -name '*.test.js' | xargs mocha --compilers js:babel/register --require ./mocha.setup.js --growl",
+    "watch-test": "nodemon -w ./src -e .jsx -e .js -x 'npm run test --loglevel silent'",
+    "bundle-client": "webpack --config webpack.client.js --release",
+    "bundle-server": "webpack --config webpack.server.js --release",
+    "bundle": "rm -rf dist && mkdir dist && cp -rf public dist/public && npm run bundle-client && npm run bundle-server",
+    "server": "node dist/server.js",
+    "watch-client": "webpack-dev-server --no-info --config webpack.client.js --content-base \"http://localhost:8080\"  --inline --hot --host localhost --port 8888",
+    "watch-server": "nodemon -w 'src/server.js' -w 'src/views' -w 'webpack.babel.js' -x 'webpack --config webpack.server.js && node dist/server.js'",
+    "dev": "concurrent --kill-others \"npm run watch-server\" \"npm run watch-client\""
+  },
+  "config": {
+    "ghooks": {
+      "pre-push": "npm run lint && npm run test"
+    }
+  },
+  "dependencies": {
+    "alt": "^0.17.6",
+    "axios": "^0.7.0",
+    "babel": "^5.8.23",
+    "body-parser": "^1.14.1",
+    "bootstrap": "git+ssh://git@github.com/twbs/bootstrap.git#v4-dev",
+    "classnames": "^2.2.0",
+    "compression": "^1.6.0",
+    "cors": "^2.7.1",
+    "express": "^4.13.3",
+    "history": "^1.12.5",
+    "react": "^0.14.0",
+    "react-dom": "^0.14.0",
+    "react-redux": "^4.0.0",
+    "react-router": "^1.0.0-rc3",
+    "redux": "^3.0.4",
+    "redux-router": "^1.0.0-beta3",
+    "redux-thunk": "^1.0.0",
+    "redux-form": "^2.4.5"
+  },
+  "devDependencies": {
+    "assets-webpack-plugin": "^3.0.0",
+    "autoprefixer-loader": "^3.1.0",
+    "babel-core": "^5.8.25",
+    "babel-eslint": "^4.1.3",
+    "babel-loader": "^5.3.2",
+    "babel-runtime": "^5.8.25",
+    "chai": "^3.4.1",
+    "concurrently": "^0.1.1",
+    "css-loader": "^0.21.0",
+    "eslint": "^1.9.0",
+    "eslint-loader": "^1.1.0",
+    "eslint-plugin-mocha-only": "0.0.3",
+    "eslint-plugin-react": "^3.9.0",
+    "expect": "^1.12.2",
+    "extract-text-webpack-plugin": "^0.8.2",
+    "ghooks": "^1.0.1",
+    "handlebars": "^4.0.3",
+    "handlebars-loader": "^1.1.4",
+    "http-proxy-middleware": "^0.9.0",
+    "jsdom": "7.0.2",
+    "jsx-loader": "^0.13.2",
+    "mocha": "^2.3.3",
+    "mocha-loader": "^0.7.1",
+    "mockery": "^1.4.0",
+    "node-sass": "^3.3.3",
+    "nodemon": "^1.7.3",
+    "path": "^0.12.7",
+    "react-addons-test-utils": "^0.14.0",
+    "react-hot-loader": "^1.3.0",
+    "redux-devtools": "^2.1.5",
+    "sass-lint": "^1.3.2",
+    "sass-loader": "^3.0.0",
+    "sinon": "^1.17.2",
+    "source-map-support": "^0.3.3",
+    "style-loader": "^0.13.0",
+    "webpack": "^1.12.2",
+    "webpack-dev-middleware": "^1.2.0",
+    "webpack-dev-server": "^1.12.1",
+    "webpack-error-notification": "^0.1.4"
+  },
+  "babel": {
+    "env": {
+      "production": {
+        "optional": [
+          "optimisation",
+          "minification"
+        ]
+      },
+      "development": {
+        "loose": "all"
+      }
+    }
+  }
+}

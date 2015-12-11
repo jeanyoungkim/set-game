@@ -1,0 +1,32 @@
+@import 'common/all';
+
+.card {
+  @include flexbox();
+  margin: 2% 1.5%;
+  height: 100px;
+  width: 30%;
+  border-radius: 13px;
+  border: 1px solid black;
+
+  .diamond {
+    flex: none;
+    margin: auto;
+    height:50px;
+    width: 50px;
+
+    &.red {
+      background-color: red;
+    }
+
+    &.green {
+      background-color: green;
+    }
+
+    &.purple {
+      background-color: purple;
+    }
+  }
+
+
+
+} // end card

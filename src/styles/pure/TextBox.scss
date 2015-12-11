@@ -1,0 +1,7 @@
+@import 'common/all';
+
+.TextBox {
+    &-input {
+        color: $text-color;
+    }
+}
