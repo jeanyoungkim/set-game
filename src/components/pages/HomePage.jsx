@@ -1,22 +1,13 @@
 import React from 'react';
 
-import TodosView from 'components/views/TodosView';
-import AuthView from 'components/views/AuthView';
-import NavigationView from 'components/views/NavigationView';
+import BoardView from 'components/views/BoardView';
+import CardView from 'components/views/CardView';
 
-
-class HomePage extends React.Component {
-
+export default class HomePage extends React.Component {
     render() {
         return (
             <div className="HomePage">
-                Home! &nbsp;
-                <NavigationView />
-
-
-                <AuthView/>
-
-                <TodosView />
+                <BoardView />
             </div>
         );
     }

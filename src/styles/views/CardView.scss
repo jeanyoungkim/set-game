@@ -2,28 +2,46 @@
 
 .card {
   @include flexbox();
+  @include box-shadow(2px, 4px, 0px, 0px, lightgray);
   margin: 2% 1.5%;
   height: 100px;
-  width: 30%;
+  width: 47%;
   border-radius: 13px;
-  border: 1px solid black;
+  border: 1px solid lightgray;
 
   .diamond {
     flex: none;
     margin: auto;
-    height:50px;
-    width: 50px;
+    height:40px;
+    width: 40px;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    transform: rotate(45deg);
 
     &.red {
       background-color: red;
+      border-color: red;
     }
 
     &.green {
       background-color: green;
+      border-color: green;
     }
 
     &.purple {
       background-color: purple;
+      border-color: green;
+    }
+
+    &.empty {
+      border-width: 2px;
+      border-style: solid;
+      background-color: white;
+    }
+
+    &.striped {
+      background-size: 6px 10px;
+      background-image: linear-gradient(90deg, transparent 50%, rgba(255, 255, 255, 1) 50%);
     }
   }
 

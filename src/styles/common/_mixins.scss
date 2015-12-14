@@ -5,3 +5,7 @@
   align-items: $align;
   justify-content: $justify;
 }
+
+@mixin box-shadow($p1, $p2, $p3, $p4, $color) {
+  box-shadow: $p1 $p2 $p3 $p4 $color;
+}
